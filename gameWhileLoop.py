@@ -8,8 +8,9 @@ os.system('cls')
 name=input("What is your name ")
 print("Hi, ", name)
 answer= input("Would you like to play a game ")
-while ('y' in answer):
+while ('Yes' in answer):
     randy=random.randrange(1,100)
+    print(randy)
     counter=0
     guess=input("please enter an integer ")
     while(guess != randy):
@@ -17,12 +18,19 @@ while ('y' in answer):
             guess=int(guess)
             check=True
         except ValueError:
-  
-            guess=int(guess)
-        guess = randy
-        print ("I was here ")
-        #try and except so to convert the guess to integer
-        #if Check
-        #end loop
-        answer=input("Do you want to play again")
+            check=False
+        if(check):
+            if guess==randy:
+                print("You win, # of tries", counter+1)
+                break
+        else: 
+            print("Sorry, Try again")
+            counter +=1
+            if guess >randy:
+                print("you guessed to high")
+            else:
+                print("you guessed to low")
+        guess=input("please guess again ")
+
+    
 print("Thank you for playing my game, ", name)
