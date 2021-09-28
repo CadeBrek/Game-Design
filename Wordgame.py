@@ -5,7 +5,8 @@ name=input("What is your name? ")
 print( "Hi, ",name)
 answer=input("Would you like to play my game ")
 while ('y' in answer):
-    randy=random.randrange(1,100)
+    randint = ("Orange,Apple,Banana")
+    randy=random.randint
     print(randy)
     counter=0
     guess=input("please enter an integer ")
