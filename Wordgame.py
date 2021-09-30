@@ -10,6 +10,7 @@ word = word.lower()
 print(word)
 for letter in word:
     print("_ ", end = " ")
+    print(letter)
 guess=input("guess the word I am thinking ")
 while (guess not in word):
     guess= guess.lower
@@ -19,4 +20,4 @@ while (guess not in word):
     else:
         print(" Wrong ")
         guess=input("try again ")
-print("thank you for playng")
+print("thank you for playing")
