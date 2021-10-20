@@ -10,12 +10,14 @@ pygame.init()
 #red = (255,0,0)
 #purple = (200,0,200)
 colors = {'red':(200,0,0), 'green':(0,200,0), 'blue':(0,0,200), 'purple':(200,0,200), 'white':(255,255,255), 'black':(0,0,0), 'neongreen':(0,200,50), 'brown':(150,100,75), 'orange':(175,75,50)}
-color= input("What color do you perfer: red,blue,green,purple,white, and brown ")
+color= input("What color do you perfer: red,blue,green,purple,white,brown, and black ")
 height= input("Enter the height of the window ")
 width= input("Enter the width of your screen ")
-
-height= int(height)
-width= int(width)
+check=True
+while check:
+    try:
+        height= int(height)
+        width= int(width)
 
 screen=pygame.display.set_mode((width,height))
 myColor= colors.get('color')
