@@ -18,6 +18,12 @@ while check:
     try:
         height= int(height)
         width= int(width)
+        if height>100 and width>100 and height<1200 and width<1200:
+            check=False
+        else:
+            print("Sorry, the values are between 100-1200")
+    except ValueError:
+        print("Sorry, enter a valid number ")
 
 screen=pygame.display.set_mode((width,height))
 myColor= colors.get('color')
@@ -35,4 +41,5 @@ while run:
     for anyThing in pygame.event.get():
         if anyThing.type ==pygame.QUIT:
             run=False
+            pygame.display.update()
 pygame.quit()
