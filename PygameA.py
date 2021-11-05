@@ -1,76 +1,69 @@
-#AmanJaleel
-
-#10/20/21
-
-# Mouse position drawing rectangle moving object
-
- 
-
-import os
-
+#Aman Jaleel
+#We're making a game where the circle eats the square
+import pygame, os, random, math
+from pygame.draw import circle
 import pygame as py
-
- 
-
-py.init() #Here we are initiating
-
-#Now we have to create the window
-
-height= 600
-
-width= 800
-
-colors = {'red':(150,0,0),'green':(0,200,0), 'blue':(0,0,255), 'purple':(150, 0, 150), 'white': (255,255,255), 'black': (0,0,0)}
-
-screen=py.display.set_mode((width,height))
-
-myColor= colors.get('purple')
-
-screen.fill(myColor)
-
-py.display.flip
-
-py.display.set_caption("Moving Square")
-
-py.display.flip()
-
- 
-
-#here we're defining the parameters that will define our square
-
-x=width/2
-
-y=height/2
-
+os.system ('cls') 
+pygame.init()
+check=True
+height=500
+width=500
+colors = {'purple':(150,0,150), 'red':(255,0,0), 'white': (255,255,255)}
+keyList = list(colors.keys())
+#we just initiated
+while check:
+    color = 'purple'
+    try:
+        height= int(height)
+        width=int(width)
+        check = False
+    except ValueError:
+        check = True
+color= colors.get(color)
+window= pygame.display.set_mode((height,width))
+window.fill(color)
+pygame.display.flip()
+rect=pygame.Rect
+x=height/2
+y=width/2
 hbox=50
-
 wbox=50
-
-#here we're creating out object square
-
+speed=5
+radius = hbox/2
+xc = random.randint(25, 500)
+yc = random.randint(25, 500)
 square=py.Rect(x,y,wbox,hbox)
-
- 
-
-#now we have to draw our object with the draw command
-
+#draw rectangle
 objColor=colors.get('red')
-
-py.draw.rect(screen, objColor, square)
-
-py.display.update #update and flip are the same thing
-
-
-speed= 5
-run=True #variable to control loop
+othColor=colors.get('white')
+pygame.draw.rect(window, objColor, square)
+py.draw.circle(window, othColor, (xc,yc), radius)
+py.display.flip()
+run= True
 while run:
-    py.time.delay(100) #This is milliseconds
-    for anyThing in py.event.get():
-        if anyThing.type ==py.QUIT:
-            run =False
+    pygame.time.delay(50)
+    for case in pygame.event.get():
+        if case.type == pygame.QUIT:
+            run= False
     keyPressed= py.key.get_pressed()
-    if keyPressed[py.K_LEFT]:
+    if keyPressed[py.K_RIGHT]:
+        square.x += speed
+    if keyPressed[py.K_LEFT]: 
         square.x -= speed
-        screen.fill(myColor)
-        py.display.update 
-py.quit()
+    if keyPressed[py.K_UP]:
+        square.y -= speed
+    if keyPressed[py.K_DOWN]: 
+        square.y += speed   
+    if keyPressed[py.K_d]:
+        xc+= speed 
+    if keyPressed[py.K_a]: 
+        xc-= speed
+    if keyPressed[py.K_w]:
+        yc -= speed
+    if keyPressed[py.K_s]: 
+        yc += speed 
+    window.fill(color)
+    py.draw.rect(window, objColor, square)
+    py.draw.circle(window, othColor, (xc,yc), radius)   
+pygame.display.update()
+pygame.quit()

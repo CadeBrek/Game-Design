@@ -66,5 +66,7 @@ while run:
     screen.fill(myColor)
     py.draw.rect(screen, objColor, square)
     py.draw.circle(screen, colorVar, (xc,yc), rad)
+        while:
+            square.y>height
     py.display.update()
 py.quit()
