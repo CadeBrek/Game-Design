@@ -1,72 +1,87 @@
 #Cade Brekken
-#10/18/21
-#Create a pygame to play
-#Mouse position, drawing rectangle, moving rectangle
-import pygame as py
-import os, time
-import os, random
-os.system('cls')
+#11/9/21
+import os
+import pygame as py, time, sys
 
-#First thing
 py.init()
+py.time.delay(100)
 
-#create window
-height = 600
-width = 800
-colors = {'red':(200,0,0), 'green':(0,200,0), 'blue':(0,0,200), 'purple':(200,0,200), 'white':(255,255,255), 'black':(0,0,0), 'neongreen':(0,200,50), 'brown':(150,100,75), 'orange':(175,75,50)}
+
+height= 700
+width= 800
+
+colors= {'red':(150,0,0), 'green': (0,200,0), 'blue':(0,0,255), 'purple':(150, 0, 150), 'white':(255,255,255), 'black':(0,0,0)}
 screen=py.display.set_mode((width,height))
-myColor= colors.get('purple')
-screen.fill(myColor)
-py.display.set_caption("Moving Square ")
 py.display.flip()
-#parameters to define our square
-x=width/2
-y=height/2
+green=colors.get('green')
+red=colors.get('red')
+blue=colors.get('blue')
+
+screen = py.display.set_mode((width, height))
+x=200
+y=200
 wbox=50
 hbox=50
-Nums={10,11,12,13,14,15,16,17,18,19,20}
-xc= random.randint(10,width)
-yc= random.randint(10, height)
-rad= wbox/2
-colorVar= colors.get('white')
-#creating object square
-#square=py.rect(x,y,wbox,hbox)
-square=py.Rect(x,y,wbox,hbox)
-#draw rectangle
-objColor=colors.get('red')
-py.draw.rect(screen, objColor, square)
-py.draw.circle(screen, colorVar, (xc,yc), rad)
-py.display.flip()
-#createspeed to move the object
-speed = 5
+boldX=width-300
+boldY=height-200
 
-run=True #Variable to control main loop
+screen.fill(green)
+py.display.set_caption("Boulder game")
+
+boulder=py.Rect(boldX,boldY,100,200)
+rect = py.Rect(x, y, hbox, wbox)
+COUNT = 10
+jumpCount = COUNT
+Jump = False 
+run=True
 while run:
-    py.time.delay(100) #Milliseconds
-    for anyThing in py.event.get():
-        if anyThing.type ==py.QUIT:
+    for ev in py.event.get():
+        if ev.type == py.QUIT:
             run=False
-    keyPressed= py.key.get_pressed()
-    if keyPressed[py.K_RIGHT]:
-        square.x += speed
-    if keyPressed[py.K_LEFT]: 
-        square.x -= speed
-    if keyPressed[py.K_UP]:
-        square.y -= speed
-    if keyPressed[py.K_DOWN]: 
-        square.y += speed   
-    if keyPressed[py.K_d]:
-        xc+= speed 
-    if keyPressed[py.K_a]: 
-        xc-= speed
-    if keyPressed[py.K_w]:
-        yc -= speed
-    if keyPressed[py.K_s]: 
-        yc += speed    
-    screen.fill(myColor)
-    py.draw.rect(screen, objColor, square)
-    py.draw.circle(screen, colorVar, (xc,yc), rad)
-        while:
-            square.y>height
+
+        speed = 2 
+        keyBoardkey = py.key.get_pressed()
+    if keyBoardkey [py.K_LEFT]:
+        if rect.colliderect(boulder):
+            print("collide")
+            rect.x +=5
+        else:
+            rect.x -= speed 
+    if keyBoardkey [py.K_RIGHT]:
+        if rect.colliderect(boulder):
+            rect.x -=5
+        else:
+            rect.x += speed 
+    if not Jump:
+        if keyBoardkey[py.K_UP]:
+            rect.y -= speed
+        if keyBoardkey[py.K_DOWN]:
+            if rect.colliderect(boulder):
+                rect.y -=5
+            else:
+                rect.y += speed
+        if keyBoardkey[py.K_SPACE]:
+            Jump = True
+    else:
+        if jumpCount>=-COUNT:
+            if rect.colliderect(boulder):
+                rect.y= rect.y-5
+                Jump=False
+                jumpCount=COUNT
+            else:
+                rect.y-= jumpCount*abs(jumpCount)/2
+                jumpCount -=1
+        else:
+            jumpCount=COUNT
+            Jump=False
+
+    rad= wbox/2
+    if rect.y > height - hbox : rect.y = height - hbox
+    if rad < y : rad = y 
+    if rad < 0 : rad = 0
+    if rad > width-x : rad = width -x 
+    screen.fill(green)
+    py.draw.rect(screen,(red),rect)
+    py.draw.rect(screen,blue,boulder)
     py.display.update()
-py.quit()
+    py.time.delay(30)

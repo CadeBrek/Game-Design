@@ -28,8 +28,6 @@ def display_Title(message, x,y):
     win.blit(text, (x,y))
     py.display.update()
     py.time.delay(100)
-def display_Subtitle
-
 run = True
 count = 0
 while run:
