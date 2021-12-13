@@ -962,9 +962,30 @@ while run:
                     Screen_size()
                 display_Title("Back", HEIGHT-95)
                 pygame.display.update()
-                if xm>450 and xm <540 and ym>200 and ym<290: 
+                if xm>100 and xm <200 and ym>200 and ym<290: 
                     WIDTH=800
                     HEIGHT=800
+                    win=pygame.display.set_mode((WIDTH,HEIGHT))
+                    win.fill(COLOR)
+                    Screen_size()
+                    display_Title("Back", HEIGHT-95)
+                    pygame.display.update()
+                if xm >335 and xm<460 and ym>HEIGHT-50 and ym<HEIGHT:
+                    Setting_Back()
+                    SETTINGS = True
+                    SCREEN = False
+                if xm >335 and xm<460 and ym>745 and ym<795:
+                    Setting_Back()
+                    SETTINGS = True
+                    SCREEN = False
+
+                if SCREEN:
+                    Screen_size()
+                display_Title("Back", HEIGHT-95)
+                pygame.display.update()
+                if xm>250 and xm <400 and ym>200 and ym<290: 
+                    WIDTH=800
+                    HEIGHT=600
                     win=pygame.display.set_mode((WIDTH,HEIGHT))
                     win.fill(COLOR)
                     Screen_size()
